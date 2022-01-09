@@ -1,0 +1,14 @@
+com\cnegs\pojo\CheckGroup.class
+com\cnegs\pojo\Menu.class
+com\cnegs\pojo\Setmeal.class
+com\cnegs\pojo\CheckItem.class
+com\cnegs\entity\PageResult.class
+com\cnegs\pojo\Permission.class
+com\cnegs\entity\Result.class
+com\cnegs\pojo\Order.class
+com\cnegs\pojo\Role.class
+com\cnegs\pojo\OrderSetting.class
+com\cnegs\entity\QueryPageBean.class
+com\cnegs\pojo\User.class
+com\cnegs\comstant\MessageConstant.class
+com\cnegs\pojo\Member.class

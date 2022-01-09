@@ -1,0 +1,6 @@
+2022/1/4 修改bug
+1.解决springmvc映射找不到controller 问题，在springmvc.xml中加上 <context:component-scan base-package="com.cnegs.controller"/>
+    让spring扫描controller包中所有类文件
+2.解决zookeeper与dubbo版本问题，dubbo2.6.0以下用zkclient的jar坐标 dubbo2.6.0以上用curator的jar坐标
+3.解决mapper文件的sql编写bug，dao层传递参数是一个对象，则在mapper文件中接收参数设为对象全路径名 例如：com.cnegs.User,
+   要操作的数值就是对象的属性 例如：#{name}、#{age}
