@@ -1,4 +1,16 @@
 package com.cnegs.entity;
+import com.cnegs.utils.QiniuUtils;
+import com.google.gson.Gson;
+import com.qiniu.common.QiniuException;
+import com.qiniu.common.Zone;
+import com.qiniu.http.Response;
+import com.qiniu.storage.BucketManager;
+import com.qiniu.storage.Configuration;
+import com.qiniu.storage.UploadManager;
+import com.qiniu.storage.model.DefaultPutRet;
+import com.qiniu.util.Auth;
+
+import javax.swing.plaf.synth.Region;
 import java.io.Serializable;
 /**
  * 封装返回结果
@@ -34,5 +46,11 @@ public class Result implements Serializable{
     }
     public void setData(Object data) {
         this.data = data;
+    }
+
+
+    public static void main(String[] args) {
+//        QiniuUtils.deleteFileFromQiniu("xiaolu.jpg");
+        QiniuUtils.upload2Qiniu("F:\\壁纸\\城市风景\\200420120121-1.jpg","xiaoxiaolu");
     }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnegs.dao.SetMealDao">
+
+    <select id="findpage" parameterType="string" resultType="com.cnegs.pojo.Setmeal">
+        select * from t_setmeal
+        <if test="queryString!=null and queryString.length>0">
+            where code=#{queryString} or name= #{queryString}
+        </if>
+    </select>
+
+    <insert id="add" parameterType="com.cnegs.pojo.Setmeal">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into t_setmeal(name,code,helpCode,sex,age,price,remark,attention,img)
+        values (
+            #{name},
+            #{code},
+            #{helpCode},
+            #{sex},
+            #{age},
+            #{price},
+            #{remark},
+            #{attention},
+            #{img})
+    </insert>
+
+    <insert id="addSetmealCheckgroup" parameterType="int">
+        insert into t_setmeal_checkgroup(setmeal_id,checkgroup_id)
+        values (#{setmeal_id},#{checkgroup_id})
+    </insert>
+</mapper>

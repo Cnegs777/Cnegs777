@@ -225,10 +225,42 @@
             },
             //钩子函数，VUE对象初始化完成后自动执行
             created() {
+                this.findPage();
             },
             methods: {
                 //编辑
                 handleEdit() {
+
+                        this.$refs['dataEditForm'].validate((valid)=>{ //valid是回调函数，用来判断表单是否提交成功，（boolean值)
+                            if(valid){
+                                this.$confirm("确认修改当前选中记录吗？","提示",{type:'warning'}).then(()=>{
+                                //表单校验通过，发生ajax请求，将录入的数据提交到后台处理
+                                console.log(this.formData);
+                                axios.post("/checkitem/update.do",this.formData).then((res)=>{
+                                    //先把添加框隐藏掉
+                                    this.dialogFormVisible4Edit = false;
+                                    if(res.data.flag){
+                                        //响应成功
+                                        this.$message({
+                                            message:res.data.message,
+                                            type:'success'
+                                        });
+                                    }else {
+                                        //响应失败
+                                        this.$message.error(res.data.message)
+                                    }
+                                }).finally(()=>{
+                                    //发送请求后，重新调用分页查询方法，加载最新数据
+                                    this.findPage();
+                                });
+                                });
+
+                            }else {
+                                //校验失败
+                                this.$message.error("表单数据校验未通过");
+                                return false;
+                            }
+                        });
                 },
                 //添加
                 handleAdd () {
@@ -264,6 +296,20 @@
                 },
                 //分页查询
                 findPage() {
+                    var param = {
+                        currentPage: this.pagination.currentPage ,
+                        pageSize: this.pagination.pageSize,
+                        queryString: this.pagination.queryString
+
+                    };
+                    //ajax异步请求，必带参数当前页码，每页展示条数 次要：关键词
+                    axios.post("/checkitem/findpage.do",param).then((res)=>{
+                        //处理响应数据
+                        this.pagination.total=res.data.total;
+                        this.dataList = res.data.rows;
+                    })
+
+
                 },
                 // 重置表单
                 resetForm() {
@@ -276,12 +322,42 @@
                 },
                 // 弹出编辑窗口
                 handleUpdate(row) {
+                    axios.get("/checkitem/findById.do?checkItemId="+row.id).then((res)=>{
+                        if(res.data.flag){
+                            this.dialogFormVisible4Edit = true;
+                            //为模型数据设置值，基于VUE双向数据绑定回显到页面
+                            this.formData = res.data.data
+                        }else {
+                            //响应失败
+                            this.$message.error("获取数据失败，请刷新当前页面")
+                        }
+                    });
                 },
                 //切换页码
                 handleCurrentChange(currentPage) {
+                    //先修改模型中页码，在调用分页方法
+                    this.pagination.currentPage = currentPage;
+                    this.findPage();
                 },
                 // 删除
                 handleDelete(row) {
+                    this.$confirm("确认删除当前选中记录吗？","提示",{type:'warning'}).then(()=>{
+                        axios.get("/checkitem/delete.do?checkItemId="+row.id).then((res)=>{
+                            if(res.data.flag){
+                                //响应成功
+                                this.$message({
+                                    message:res.data.message,
+                                    type:'success'
+                                });
+                            }else {
+                                //响应失败
+                                this.$message.error(res.data.message)
+                            }
+                        }).finally(()=>{
+                            //发送请求后，重新调用分页查询方法，加载最新数据
+                            this.findPage();
+                        });
+                    });
                 }
             }
         })
