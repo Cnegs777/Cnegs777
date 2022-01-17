@@ -19,5 +19,33 @@
     <!--指定服务注册中心地址-->
     <dubbo:registry address="zookeeper://127.0.0.1:2181" timeout="60000"/>
     <!--批量扫描，发布服务-->
+<<<<<<< Updated upstream
     <dubbo:annotation package="com.cnegs.service"/>
+=======
+<<<<<<< Updated upstream
+    <dubbo:annotation package="com.itheima.service"/>
+=======
+<<<<<<< Updated upstream
+    <dubbo:annotation package="com.cnegs.service"/>
+=======
+<<<<<<< Updated upstream
+    <dubbo:annotation package="com.itheima.service"/>
+=======
+    <dubbo:annotation package="com.cnegs.service"/>
+
+
+<!--    把freemarker配置对象交给spring管理-->
+    <bean id="freemarkerConfig"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <!--指定模板文件所在目录-->
+        <property name="templateLoaderPath" value="/WEB-INF/ftl/" />
+        <!--指定字符集-->
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
+<!--    加载属性文件，后期在java代码中会使用到属性文件中定义的key和value-->
+    <context:property-placeholder location="classpath:freemarker.properties"/>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 </beans>

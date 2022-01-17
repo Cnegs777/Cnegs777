@@ -77,4 +77,26 @@
     <select id="selectCheckItemIdsByCheckgroupId" parameterType="int" resultType="int">
         select checkitem_id from t_checkgroup_checkitem where checkgroup_id = #{checkgorupId};
     </select>
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+=======
+
+    <resultMap id="findByIdResultMap" type="com.cnegs.pojo.CheckItem">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="code" property="code"/>
+        <result column="age" property="age"/>
+        <result column="price" property="price"/>
+        <result column="type" property="type"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+    </resultMap>
+
+    <select id="findCheckItemById" resultMap="findByIdResultMap">
+        select * from t_checkitem where id in (select checkitem_id from t_checkgroup_checkitem where checkgroup_id =#{id})
+    </select>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 </mapper>

@@ -71,4 +71,35 @@
     <select id="findAll" resultType="com.cnegs.pojo.CheckGroup">
         select * from t_checkgroup
     </select>
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+=======
+
+    <resultMap id="baseResultMap" type="com.cnegs.pojo.CheckGroup">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+    </resultMap>
+    <resultMap id="findByIdResultMap" extends="baseResultMap" type="com.cnegs.pojo.CheckGroup">
+        <collection property="checkItems"
+                    javaType="ArrayList"
+                    column="id"
+                    ofType="com.cnegs.pojo.CheckItem"
+                    select="com.cnegs.dao.CheckItemDao.findCheckItemById">
+
+        </collection>
+    </resultMap>
+
+    <select id="findcheckgroupById" resultMap="findByIdResultMap">
+        select * from t_checkgroup
+        where id in (select checkgroup_id from t_setmeal_checkgroup where setmeal_id=#{id})
+    </select>
+
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 </mapper>
