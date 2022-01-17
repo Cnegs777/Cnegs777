@@ -1,4 +1,4 @@
-package com.itheima.jobs;
+package com.cnegs.jobs;
 
 import com.cnegs.comstant.RedisConstant;
 import com.cnegs.utils.QiniuUtils;

@@ -22,14 +22,6 @@
 
     <dubbo:annotation package="com.cnegs.service"/>
 
-    <dubbo:annotation package="com.itheima.service"/>
-
-    <dubbo:annotation package="com.cnegs.service"/>
-
-
-    <dubbo:annotation package="com.itheima.service"/>
-
-    <dubbo:annotation package="com.cnegs.service"/>
 
 
 <!--    把freemarker配置对象交给spring管理-->

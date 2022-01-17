@@ -77,10 +77,7 @@
     <select id="selectCheckItemIdsByCheckgroupId" parameterType="int" resultType="int">
         select checkitem_id from t_checkgroup_checkitem where checkgroup_id = #{checkgorupId};
     </select>
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
+
 
     <resultMap id="findByIdResultMap" type="com.cnegs.pojo.CheckItem">
         <id column="id" property="id"/>
@@ -97,6 +94,4 @@
     <select id="findCheckItemById" resultMap="findByIdResultMap">
         select * from t_checkitem where id in (select checkitem_id from t_checkgroup_checkitem where checkgroup_id =#{id})
     </select>
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 </mapper>

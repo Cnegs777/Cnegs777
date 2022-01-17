@@ -71,10 +71,6 @@
     <select id="findAll" resultType="com.cnegs.pojo.CheckGroup">
         select * from t_checkgroup
     </select>
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
 
     <resultMap id="baseResultMap" type="com.cnegs.pojo.CheckGroup">
         <id column="id" property="id"/>
@@ -100,6 +96,4 @@
         where id in (select checkgroup_id from t_setmeal_checkgroup where setmeal_id=#{id})
     </select>
 
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 </mapper>
