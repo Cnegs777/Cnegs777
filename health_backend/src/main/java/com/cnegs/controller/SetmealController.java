@@ -6,14 +6,7 @@ import com.cnegs.comstant.RedisConstant;
 import com.cnegs.entity.PageResult;
 import com.cnegs.entity.QueryPageBean;
 import com.cnegs.entity.Result;
-<<<<<<< Updated upstream
 import com.cnegs.pojo.CheckGroup;
-=======
-<<<<<<< Updated upstream
-import com.cnegs.pojo.CheckGroup;
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 import com.cnegs.pojo.Setmeal;
 import com.cnegs.service.SetMealService;
 import com.cnegs.utils.QiniuUtils;

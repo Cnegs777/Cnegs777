@@ -16,14 +16,9 @@ public interface SetMealService {
     PageResult findpage(QueryPageBean queryPageBean);
 
     void add(Setmeal setmeal, Integer[] checkgroupIds);
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
 
     public List<Setmeal> findAll();
 
     Setmeal findById(int id);
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+
 }

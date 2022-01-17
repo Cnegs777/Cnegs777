@@ -25,15 +25,12 @@ public class Order implements Serializable{
         this.id = id;
     }
 
-<<<<<<< Updated upstream
-=======
     public Order(Integer memberId, Date orderDate,Integer setmealId) {
         this.memberId = memberId;
         this.orderDate = orderDate;
         this.setmealId = setmealId;
     }
 
->>>>>>> Stashed changes
     public Order(Integer memberId, Date orderDate, String orderType, String orderStatus, Integer setmealId) {
         this.memberId = memberId;
         this.orderDate = orderDate;

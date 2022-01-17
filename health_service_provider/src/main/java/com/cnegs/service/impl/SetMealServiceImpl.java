@@ -5,30 +5,16 @@ import com.cnegs.comstant.RedisConstant;
 import com.cnegs.dao.SetMealDao;
 import com.cnegs.entity.PageResult;
 import com.cnegs.entity.QueryPageBean;
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
 import com.cnegs.pojo.CheckGroup;
 import com.cnegs.pojo.CheckItem;
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 import com.cnegs.pojo.Setmeal;
 import com.cnegs.service.SetMealService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import redis.clients.jedis.JedisPool;
-
 import java.util.HashMap;
-<<<<<<< Updated upstream
-=======
-=======
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +29,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 import java.util.Map;
 
 
@@ -62,18 +46,12 @@ public class SetMealServiceImpl implements SetMealService {
     @Autowired
     private JedisPool jedisPool;
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
     @Autowired
     private FreeMarkerConfigurer freeMarkerConfigurer;
 
     @Value("${out_put_path}")
     private String outPuthPath;
 
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     @Override
     public PageResult findpage(QueryPageBean queryPageBean) {
         PageHelper.startPage(queryPageBean.getCurrentPage(),queryPageBean.getPageSize());
@@ -87,18 +65,8 @@ public class SetMealServiceImpl implements SetMealService {
         try {
             String img = setmeal.getImg();
             //七牛云访问地址
-<<<<<<< Updated upstream
-            String url = "http://r5i0c7ddh.hb-bkt.clouddn.com/"+img;
-            setmeal.setImg(url);
-=======
-<<<<<<< Updated upstream
-            String url = "http://r5i0c7ddh.hb-bkt.clouddn.com/"+img;
-            setmeal.setImg(url);
-=======
 //            String url = "http://r5i0c7ddh.hb-bkt.clouddn.com/"+img;
 //            setmeal.setImg(url);
->>>>>>> Stashed changes
->>>>>>> Stashed changes
             //保存图片到redis
             setMealdao.add(setmeal);
             jedisPool.getResource().sadd(RedisConstant.SETMEAL_PIC_DB_RESOURCES,img);
@@ -110,25 +78,14 @@ public class SetMealServiceImpl implements SetMealService {
                 map.put("checkgroup_id",checkgroupId);
                 setMealdao.addSetmealCheckgroup(map);
             }
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
 
             //在新增套餐后，要生成freemarker静态文件(方法名：合成静态页面方法：generateHtml,生成套餐列表页面,generteMobileSetMealListHtml,生成套餐详情页面：generateMobileSetmealDetailHtml)
             generteMobileSetMealStaticHtml();
->>>>>>> Stashed changes
->>>>>>> Stashed changes
         } catch (Exception e) {
             System.out.println("新增套餐或建立关系失败----："+e.getMessage());
             e.printStackTrace();
         }
     }
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
-
     private void generteMobileSetMealStaticHtml() {
         Map<String,Object> map = new HashMap<>();
         //先准备数据
@@ -189,7 +146,4 @@ public class SetMealServiceImpl implements SetMealService {
     public Setmeal findById(int id) {
         return setMealdao.findById(id);
     }
-
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 }

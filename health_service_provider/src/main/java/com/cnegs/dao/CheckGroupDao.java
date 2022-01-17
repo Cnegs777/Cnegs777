@@ -29,12 +29,6 @@ public interface CheckGroupDao {
 
     List<CheckGroup> findAll();
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
     List<CheckGroup> findcheckgroupById(int id);
 
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 }
