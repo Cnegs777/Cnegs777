@@ -124,20 +124,14 @@
                             //按钮显示内容
                             validateCodeButton = $("#validateCodeButton")[0]; //锁定dom对象
                             //(计时器)窗口对象，每秒调用一次读秒方法,要一个定时器属性接收，用于秒数读完关闭定时器
-                            clock = window.setInterval(doLoop,1000);//1000为毫秒 每秒调用一次
+                            clock = window.setInterval(doLoop, 1000);//1000为毫秒 每秒调用一次
                             //发送验证码请求
-                            axios.post("/validateCode/send4Order.do?telephone=" + telephone).then((res)=>{
-                                if(res.data.flag){
-                                    //发送成功
-                                    this.$message({
-                                        type:'success',
-                                        message:res.data.message
-                                    });
-                                }else{
-                                    //发送失败
-                                    this.$message(res.data.message)
+                            axios.post("/validateCode/send4Order.do?telephone=" + this.orderInfo.telephone).then((res)=>{
+                                if(!res.data.flag){
+                                    //验证码发送失败
+                                    this.$message.error('验证码发送失败，请检查手机号输入是否正确');
                                 }
-                            })
+                            });
                     },
                     //提交预约
                     submitOrder(){

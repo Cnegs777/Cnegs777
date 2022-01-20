@@ -7,6 +7,7 @@ import com.cnegs.entity.QueryPageBean;
 import com.cnegs.entity.Result;
 import com.cnegs.pojo.CheckItem;
 import com.cnegs.service.CheckItemService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,23 +28,10 @@ public class CheckItemController {
     private CheckItemService checkItemService;
 
     /**
-     * 新增
-     * @return
-     */
-    @RequestMapping("/add")
-    public Result add(@RequestBody CheckItem checkItem){
-        try {
-            checkItemService.add(checkItem);
-        } catch (Exception e) {
-            return new Result(false, MessageConstant.ADD_CHECKITEM_FAIL);
-        }
-        return new Result(true,MessageConstant.ADD_CHECKGROUP_SUCCESS);
-    }
-
-    /**
      * 分页查询 使用mybatis插件代替手动limit分页
      * @return
      */
+    @PreAuthorize("hasAuthority('CHECKITEM_QUERY')")//权限校验
     @RequestMapping("/findpage")
     public PageResult findpage(@RequestBody QueryPageBean queryPageBean){
         try {
@@ -56,6 +44,21 @@ public class CheckItemController {
         return null;
     }
 
+    /**
+     * 新增
+     * @return
+     */
+    @PreAuthorize("hasAuthority('CHECKITEM_ADD')")//权限校验
+    @RequestMapping("/add")
+    public Result add(@RequestBody CheckItem checkItem){
+        try {
+            checkItemService.add(checkItem);
+        } catch (Exception e) {
+            return new Result(false, MessageConstant.ADD_CHECKITEM_FAIL);
+        }
+        return new Result(true,MessageConstant.ADD_CHECKGROUP_SUCCESS);
+    }
+
     @RequestMapping("/findById")
     public Result findById(Integer checkItemId){
 
@@ -66,6 +69,7 @@ public class CheckItemController {
         return new Result(true,MessageConstant.QUERY_CHECKITEM_SUCCESS,checkItem);
     }
 
+    @PreAuthorize("hasAuthority('CHECKITEM_DELETE')")
     @RequestMapping("/delete")
     public Result delete(Integer checkItemId){
         try {
@@ -78,6 +82,7 @@ public class CheckItemController {
         return new Result(true,MessageConstant.DELETE_CHECKITEM_SUCCESS);
     }
 
+    @PreAuthorize("hasAuthority('CHECKITEM_EDIT')")//权限校验
     @RequestMapping("/update")
     public Result update(@RequestBody CheckItem checkItem){
         try {

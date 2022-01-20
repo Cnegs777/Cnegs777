@@ -18,6 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * @Author Cnegs
@@ -54,4 +57,17 @@ public class CheckItemTest {
 //        System.out.println("总记录数:"+findpage.getTotal());
 //        System.out.println("数据集合:"+findpage.getRows());
 //    }
+public static void main(String[] args) {
+    List<String> list = new ArrayList<>();
+    list.add("2018.02");
+    list.add("2018.03");
+    list.add("2018.06");
+    list.add("2018.07");
+    for (String s : list) {
+        String replace = s.replace(".", "-");
+        String startTime = replace+"-01";
+        String endTime = replace+"-31";
+        System.out.println(startTime+":"+endTime);
+    }
+}
 }

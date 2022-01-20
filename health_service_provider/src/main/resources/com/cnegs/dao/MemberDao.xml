@@ -95,4 +95,8 @@
     <select id="findMemberTotalCount" resultType="int">
         select count(id) from t_member
     </select>
+
+    <select id="findMemberCountBetweenDate" resultType="java.lang.Integer" parameterType="map">
+        select count(id) from t_member where regTime BETWEEN #{startTime} and #{endTime}
+    </select>
 </mapper>

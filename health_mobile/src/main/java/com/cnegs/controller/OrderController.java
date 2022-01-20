@@ -2,6 +2,7 @@ package com.cnegs.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.cnegs.comstant.MessageConstant;
+import com.cnegs.comstant.RedisMessageConstant;
 import com.cnegs.entity.Result;
 import com.cnegs.pojo.Order;
 import com.cnegs.service.OrderService;
@@ -36,12 +37,12 @@ public class OrderController {
     public Result submitOrder(@RequestBody Map map){
         //从redis中获取缓存的验证码和用户输入的进行比对
         String telephone =(String) map.get("telephone");
-       /* String redisKey = telephone+ RedisMessageConstant.SENDTYPE_ORDER;
+        String redisKey = telephone+ RedisMessageConstant.SENDTYPE_ORDER;
         String validateCodeInRedis = jedisPool.getResource().get(redisKey);
         String validateCode = (String) map.get("validateCode");
         if(validateCodeInRedis!=null && validateCode!=null && validateCodeInRedis.equals(validateCode)){
             //验证码匹配成功，完成预约操作
-            //设置预约类型：微信预约，电话预约等*/
+            //设置预约类型：微信预约，电话预约等
             map.put("orderType", Order.ORDERTYPE_WEIXIN);
             Result result = null;
             try {
@@ -55,10 +56,10 @@ public class OrderController {
                 System.out.println("尊敬的"+telephone+"用户，"+"请在"+(String) map.get("orderDate")+"做体检检查");
             }
             return result;
-  /*      }else {
+        }else {
             //验证码不匹配，返回信息
             return new Result(false, MessageConstant.VALIDATECODE_ERROR);
-        }*/
+        }
     }
 
     /**
