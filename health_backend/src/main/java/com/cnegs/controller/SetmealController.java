@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import redis.clients.jedis.JedisPool;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.UUID;
 
 /**

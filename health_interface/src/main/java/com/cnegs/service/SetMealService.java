@@ -6,6 +6,7 @@ import com.cnegs.pojo.Setmeal;
 import com.github.pagehelper.Page;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author Cnegs
@@ -21,4 +22,5 @@ public interface SetMealService {
 
     Setmeal findById(int id);
 
+    Map<String, Object> queryOrderCount();
 }

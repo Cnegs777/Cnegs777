@@ -2,6 +2,7 @@ package com.cnegs.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.cnegs.comstant.RedisConstant;
+import com.cnegs.dao.OrderDao;
 import com.cnegs.dao.SetMealDao;
 import com.cnegs.entity.PageResult;
 import com.cnegs.entity.QueryPageBean;
@@ -14,7 +15,9 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import redis.clients.jedis.JedisPool;
-import java.util.HashMap;
+
+import java.util.*;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +31,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -48,6 +49,9 @@ public class SetMealServiceImpl implements SetMealService {
 
     @Autowired
     private FreeMarkerConfigurer freeMarkerConfigurer;
+
+    @Autowired
+    private OrderDao orderDao;
 
     @Value("${out_put_path}")
     private String outPuthPath;
@@ -143,7 +147,26 @@ public class SetMealServiceImpl implements SetMealService {
         return setMealdao.findAll();
     }
 
+
     public Setmeal findById(int id) {
         return setMealdao.findById(id);
+    }
+
+    /**
+     * 统计套餐预约占比情况
+     * @return
+     */
+    @Override
+    public Map<String, Object> queryOrderCount() {
+        //1.先查询所有套餐获取套餐name
+        List<Map<String, Object>> maps = setMealdao.queryOrderCount();
+        List<String> names = new ArrayList<>();
+        for (Map<String, Object> map : maps) {
+            names.add((String) map.get("name"));
+        }
+        Map<String,Object> map = new HashMap<>();
+        map.put("setmealNames",names);
+        map.put("setmealCount",maps);
+        return map;
     }
 }

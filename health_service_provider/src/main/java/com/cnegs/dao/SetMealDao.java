@@ -24,4 +24,6 @@ public interface SetMealDao {
 
     public Setmeal findById(@Param("id") int id);
 
+    List<Map<String,Object>> queryOrderCount();
+
 }
